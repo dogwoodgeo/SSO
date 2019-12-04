@@ -167,6 +167,7 @@ require([
   //* Run runQuery function for button click
   //* ---------------------------------------
   function runQuery() {
+    // TODO: Destroy previous version of ssoFL
     //* Get the date from user input
     let value = ssoDate.value;
     //* build the query string
