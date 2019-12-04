@@ -1,0 +1,19 @@
+html,
+body,
+#viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#queryDiv {
+    font-family: Arial;
+    text-align: center;
+    background-color: #696969; 
+    color:  white;
+    /* opacity: .95; */
+    padding: 10px;
+    width: 350px;
+    height: 175px;
+}

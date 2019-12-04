@@ -1,0 +1,5 @@
+# Ignore graphics directory
+[Gg]raphics/
+
+# Ignore VS Code files
+.vscode/
