@@ -183,8 +183,11 @@ require([
           document.getElementById('printResults').innerHTML =
           `There are no SSOs for the selected date.`;
         } else {
+          document.getElementById('printDate').innerHTML =
+          `${value}`;
           document.getElementById('printResults').innerHTML =
-          `SSO Count: ${count}`;
+          `SSO count = ${count}`;
+          ssoDate.value = '';
         }
     });
   }  
