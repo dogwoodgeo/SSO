@@ -20,7 +20,6 @@ require([
       Home
 )
 {
-
   /** 
    * * LRWRA Basemap IDs
    * * ----------------------------
@@ -128,6 +127,15 @@ require([
     popupTemplate: puTemplate,
     labelingInfo:[labels],
     outFields: ['*'],
+    /***
+     * ! Load layer with a definitionExpression that returns no features.
+     * ! I don't want any SSO features in map before user runs query.
+     * ! Prev version I didn't set the defExp until the runQuery() then used map.add(ssoLayer). 
+     * ! If user queried same date in one session it resulted in duplicate features.
+     * ! Now it loads FL with a query that returns no features and defExp is changed in runQuery().
+     */
+    definitionExpression: 'OBJECTID is NULL'
+    
   });
 
   const basinsLayer = new FeatureLayer({
@@ -138,7 +146,7 @@ require([
   //* Map object
   const map = new Map({
     basemap: grayBasemap,
-    layers: [basinsLayer]
+    layers: [basinsLayer, ssoLayer]
   });
 
   //* MapView Object
@@ -167,15 +175,12 @@ require([
   //* Run runQuery function for button click
   //* ---------------------------------------
   function runQuery() {
-    // TODO: Destroy previous version of ssoFL
     //* Get the date from user input
     let value = ssoDate.value;
     //* build the query string
     let qryString = `OCCRDTTM LIKE '${value}%'`
     //* Apply the definition expression
     ssoLayer.definitionExpression = qryString;
-    //* Add to the map
-    map.add(ssoLayer);
 
     //* Get feature count and add to DOM
     ssoLayer.queryFeatureCount()
